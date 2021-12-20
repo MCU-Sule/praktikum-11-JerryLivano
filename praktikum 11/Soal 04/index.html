@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="Jerry Livano 2172002">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<style>
+    td {
+        border: 2px solid black;
+        width: 50px;
+        height: 50px;
+        font-size: 40px;
+        text-align: center;
+    }
+    #hasil {
+        border: 2px solid black;
+        width: 550px;
+        height: 150px;
+        margin-top: 20px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        overflow-y: scroll;
+        padding-left: 5px;
+    }
+    #container {
+        width: 550px;
+        height: 70px;
+        margin-top: 5px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        display: inline-flex;
+    }
+    #batu, #gunting, #kertas {
+        border: 2px solid black;
+        width: 60px;
+        height: 60px;
+        margin: auto;
+        text-align: center;
+        line-height: 60px;
+        cursor: pointer;
+    }
+    #batu:hover, #gunting:hover, #kertas:hover {
+        background-color: black;
+        color: white;
+    }
+</style>
+<body>
+    <table align="center" cellpadding="0" cellspacing="0">
+        <tr>
+            <script>
+                for (i=0; i<10; i++){
+                    document.write("<td id='player" + i + "'></td>");
+                }
+            </script>
+        </tr>
+        <tr>
+            <script>
+                for (j=0; j<10; j++){
+                    document.write("<td id='enemy" + j + "'></td>");
+                }
+            </script>
+        </tr>
+    </table>
+    <div id="hasil"></div>
+    <div id="container">
+        <div id="batu">Batu</div>
+        <div id="gunting">Gunting</div>
+        <div id="kertas">Kertas</div>
+    </div>
+    <script>
+        $("#player0").html("P");
+        $("#enemy0").html("E");
+        let p = 0;
+        let e = 0;
+        let a = $("#player0").html;
+        let b = $("#enemy0").html;
+        let random, conf1, conf2;
+        // 0=batu 1=gunting 2=kertas
+        $("#batu").click(function(){
+            random = Math.floor(Math.random()*3);
+            if (random == 0){
+                $("#hasil").append("Batu(User) ketemu Batu(com), Draw<br>");
+            }
+            else if (random == 1 && p == 8){
+                $("#player"+p).html("");
+                p++;
+                $("#player"+p).html("P");
+                $("#hasil").append("Batu(User) ketemu Gunting(com), Pemain Maju<br>");
+                conf1 = confirm("You Win, Try Again?");
+                if (conf1){
+                    window.location.reload();
+                }
+                else {
+                    $("#batu").off('click');
+                    $("#gunting").off('click');
+                    $("#kertas").off('click');
+                }
+            }
+            else if (random == 1){
+                $("#player"+p).html("");
+                p++;
+                $("#player"+p).html("P");
+                $("#hasil").append("Batu(User) ketemu Gunting(com), Pemain Maju<br>");
+            }
+            else if (random == 2 && e == 8){
+                $("#enemy"+e).html("");
+                e++;
+                $("#enemy"+e).html("E");
+                $("#hasil").append("Batu(User) ketemu Kertas(com), Musuh Maju<br>");
+                conf2 = confirm("You Lose, Try Again?");
+                if (conf2){
+                    window.location.reload();
+                }
+                else {
+                    $("#batu").off('click');
+                    $("#gunting").off('click');
+                    $("#kertas").off('click');
+                }
+            }
+            else {
+                $("#enemy"+e).html("");
+                e++;
+                $("#enemy"+e).html("E");
+                $("#hasil").append("Batu(User) ketemu Kertas(com), Musuh Maju<br>");
+            }
+        })
+        $("#gunting").click(function gunting(){
+            random = Math.floor(Math.random()*3);
+            if (random == 1){
+                $("#hasil").append("Gunting(User) ketemu Gunting(com), Draw<br>");
+            }
+            else if (random == 2 && p == 8){
+                $("#player"+p).html("");
+                p++;
+                $("#player"+p).html("P");
+                $("#hasil").append("Gunting(User) ketemu Kertas(com), Pemain Maju<br>");
+                conf1 = confirm("You Win, Try Again?");
+                if (conf1){
+                    window.location.reload();
+                }
+                else {
+                    $("#batu").off('click');
+                    $("#gunting").off('click');
+                    $("#kertas").off('click');
+                }
+            }
+            else if (random == 2){
+                $("#player"+p).html("");
+                p++;
+                $("#player"+p).html("P");
+                $("#hasil").append("Gunting(User) ketemu Kertas(com), Pemain Maju<br>");
+            }
+            else if (random == 0 && e == 8){
+                $("#enemy"+e).html("");
+                e++;
+                $("#enemy"+e).html("E");
+                $("#hasil").append("Gunting(User) ketemu Batu(com), Musuh Maju<br>");
+                conf2 = confirm("You Lose, Try Again?");
+                if (conf2){
+                    window.location.reload();
+                }
+                else {
+                    $("#batu").off('click');
+                    $("#gunting").off('click');
+                    $("#kertas").off('click');
+                }
+            }
+            else {
+                $("#enemy"+e).html("");
+                e++;
+                $("#enemy"+e).html("E");
+                $("#hasil").append("Gunting(User) ketemu Batu(com), Musuh Maju<br>");
+            }
+        })
+        $("#kertas").click(function kertas(){
+            random = Math.floor(Math.random()*3);
+            if (random == 2){
+                $("#hasil").append("Kertas(User) ketemu Kertas(com), Draw<br>");
+            }
+            else if (random == 0 && p == 8){
+                $("#player"+p).html("");
+                p++;
+                $("#player"+p).html("P");
+                $("#hasil").append("Kertas(User) ketemu Batu(com), Pemain Maju<br>");
+                conf1 = confirm("You Win, Try Again?");
+                if (conf1){
+                    window.location.reload();
+                }
+                else {
+                    $("#batu").off('click');
+                    $("#gunting").off('click');
+                    $("#kertas").off('click');
+                }
+            }
+            else if (random == 0){
+                $("#player"+p).html("");
+                p++;
+                $("#player"+p).html("P");
+                $("#hasil").append("Kertas(User) ketemu Batu(com), Pemain Maju<br>");
+            }
+            else if (random == 1 && e == 8){
+                $("#enemy"+e).html("");
+                e++;
+                $("#player"+p).html("P");
+                $("#enemy"+e).html("E");
+                $("#hasil").append("Kertas(User) ketemu Gunting(com), Musuh Maju<br>");
+                conf2 = confirm("You Lose, Try Again?");
+                if (conf2){
+                    window.location.reload();
+                }
+                else {
+                    $("#batu").off('click');
+                    $("#gunting").off('click');
+                    $("#kertas").off('click');
+                }
+            }
+            else {
+                $("#enemy"+e).html("");
+                e++;
+                $("#enemy"+e).html("E");
+                $("#hasil").append("Kertas(User) ketemu Gunting(com), Musuh Maju<br>");
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="Jerry Livano 2172002">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,400;1,300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Mulish', sans-serif;
+    }
+    body {
+        background-color: #e1e1e1;
+        position: relative;
+    }
+    #tulisan {
+        margin-top: 20%;
+        margin-left: 50%;
+        transform: translate(-50%, -50%);
+        width: 650px;
+        height: 20px;
+        color: #5a5a58;
+        padding-left: 150px;
+        word-spacing: 120px;
+    }
+    #container {
+        margin-left: 50%;
+        margin-top: 2.5%;
+        transform: translate(-50%, -50%);
+        width: 650px;
+        height: 100px;
+        display: inline-flex;
+    }
+    #main {
+        background-color: #eeeeee;
+        border: 1px solid black;
+        width: 320px;
+        height: 30px;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 10px;
+        text-align: center;
+        margin-left: 160px;
+        transform: translateX(-50%, -50%);
+    }
+    .isi {
+        border: 1px solid black;
+        background-color: #eeeeee;
+        width: 160px;
+        height: 45px; 
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 15px;
+        font-size: 24px; 
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
+<body>
+    <div id="tulisan"></div>
+    <div id="container">
+        <div id="main">Press any key to get the keyCode</div>
+    </div>
+    <script>
+        document.addEventListener("keypress", pencet);
+        function pencet (key){
+            $("#main").hide();
+            $("#tulisan").html("event.key event.keyCode event.code");
+            $("#container").html("<div class='isi' id='a'>a</div><div class='isi' id='b'></div><div class='isi' id='c'></div>");
+            $("#a").html(key.key);
+            $("#b").html(key.keyCode);
+            $("#c").html(key.code);
+        }
+    </script>
+</body>
+</html>
